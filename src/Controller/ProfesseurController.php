@@ -12,8 +12,9 @@ class ProfesseurController extends AbstractController
      */
     public function index()
     {
+        $user=$this->getUser();
         return $this->render('professeur/index.html.twig', [
-            'controller_name' => 'ProfesseurController',
+            'controller_name' => 'ProfesseurController','user'=>$user
         ]);
     }
 }

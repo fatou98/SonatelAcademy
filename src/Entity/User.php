@@ -33,13 +33,8 @@ class User implements AdvancedUserInterface, \Serializable {
      * @Assert\NotBlank()
      */
     private $nom;
-     /**
-     * @ORM\Column(type="string", length=30, unique=false)
-     * @Assert\NotBlank()
-     */
-    private $login;
  /**
-     * @ORM\Column(type="bigint", length=200, unique=true)
+     * @ORM\Column(type="bigint", length=255, unique=true)
      * @Assert\NotBlank()
      */
     private $Numpiece;
@@ -73,6 +68,11 @@ class User implements AdvancedUserInterface, \Serializable {
      * @ORM\Column(name="roles", type="array")
      */
     private $roles;
+
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $image;
     public function __construct() {
         $this->isActive = true;
         // may not be needed, see section on salt below
@@ -230,21 +230,35 @@ class User implements AdvancedUserInterface, \Serializable {
         $this->Tel = $Tel;
         return $this;
     }
-    /**
-     * Get the value of login
-     */ 
-    public function getLogin()
+    public function getImage()
     {
-        return $this->login;
+        return $this->image;
     }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     /**
-     * Set the value of login
+     * Get the value of nom
+     */ 
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set the value of nom
      *
      * @return  self
      */ 
-    public function setLogin($login)
+    public function setNom($nom)
     {
-        $this->login = $login;
+        $this->nom = $nom;
+
         return $this;
     }
 }

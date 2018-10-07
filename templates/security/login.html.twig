@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+   
+    
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+      <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+        <div class="row w-100">
+          <div class="col-lg-4 mx-auto">
+            <div class="auto-form-wrapper">
+             {% if error %}
+        <div class="alert alert-danger">
+            <ul class="list-unstyled mb-0">
+                <li><span class="initialism form-error-icon badge badge-danger">Error</span> 
+                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+
+                    {{form(form)}}
+
+    
+                <div class="text-block text-center my-3">
+                  <span class="text-small font-weight-semibold">Not a member ?</span>
+                                    <a href="/register" class="text-black text-small">S'inscrire</a>
+
+                </div>
+            </div>
+          
+            <p class="footer-text text-center">copyright © 2018 FatouMbathie. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+{% endblock %}

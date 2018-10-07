@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+      <div class="content-wrapper d-flex align-items-center auth register-bg-1 theme-one">
+        <div class="row w-100">
+          <div class="col-lg-6 mx-auto"><br><br>
+            <h2 class="text-center mb-12">Inscription</h2>
+            <div class="auto-form-wrapper">
+                         <div class="text-block text-left my-3">
+                        {{form(form)}}
+
+                  <span class="text-small font-weight-semibold">Vous avez un compte ?</span>
+                  <a href="/login" class="text-black text-small">Se login</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+{% endblock %}

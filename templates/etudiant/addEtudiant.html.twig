@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %}
+
+ <div class="col-md-10 grid-margin stretch-card">
+              <div class="card col-md-6">
+                <div class="card-body">
+                  <h2 class="card-title">Ajouter un etudiant</h2>
+                  <p class="card-description">
+                    *les champs suivis d'une etoile sont obligatoire.
+                  </p>
+                  <form class="forms-sample" style="display:flex;flex-wrap:wrap;">
+                    <div class="form-group col-md-6">
+                      <label for="exampleInputName1">Prenom</label>
+                      <input type="text" class="form-control" name="prenom" placeholder="Prenom">
+                    </div> <div class="form-group col-md-6">
+                      <label for="exampleInputPassword4">Nom</label>
+                      <input type="text" class="form-control" name="nom" placeholder="Nom">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="exampleInputEmail3">Email</label>
+                      <input type="email" class="form-control" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="exampleInputPassword4">Numéro CNI*</label>
+                      <input type="number" class="form-control" id="exampleInputPassword4" placeholder="Numéro CNI*">
+                    </div>
+                     <div class="form-group col-md-6">
+                      <label for="exampleInputPassword4">Portable</label>
+                      <input type="number" class="form-control" id="exampleInputPassword4" placeholder="Portable">
+                    </div>
+                     <div class="form-group col-md-6">
+                      <label for="exampleInputPassword4">Téléphone fixe</label>
+                      <input type="number" class="form-control" id="exampleInputPassword4" placeholder="Téléphone fixe">
+                    </div>
+                    
+                   
+                     <div class="form-group col-md-6">
+                      <label for="exampleInputPassword4">Date de naissance</label>
+                      <input type="date" class="form-control" id="exampleInputPassword4" placeholder="Date de naissance">
+                    </div>
+                    
+                     <div class="form-group col-md-6">
+                      <label for="exampleInputPassword4">Lieu de naissance</label>
+                      <input type="text" class="form-control" id="exampleInputPassword4" placeholder="Lieu de naissance">
+                    </div> <div class="form-group col-md-6">
+                      <label for="exampleTextarea1">Adresse</label>
+                      <textarea class="form-control" id="exampleTextarea1" rows="2" placeholder="Adresse"></textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Image</label><br>
+                      <input type="file" name="img" class="">
+                      
+                    </div>
+                  
+                    <button type="submit" class="btn btn-success mr-2">Enregistrer</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+{% endblock %}
