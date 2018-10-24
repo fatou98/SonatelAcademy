@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Sonatel Academy</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{{asset('vendors/iconfonts/mdi/css/materialdesignicons.min.css')}}">
+  <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
+  <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.addons.css')}}">
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
   <link rel="shortcut icon" href="images/favicon.png" />
-  <link rel="stylesheet" href="../../vendors/icheck/skins/all.css">
+  <link rel="stylesheet" href="{{asset('../../vendors/icheck/skins/all.css')}}">
 
     </head>
     <body> <div class="container-scroller">
@@ -18,10 +18,10 @@
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.html">
-          <img src="images/sonatelogo.png" alt="logo" />
+          <img src="{{asset('images/sonatelogo.png')}}" alt="logo" />
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">
-          <img src="images/sonatelogo.svp" alt="logo" />
+          <img src="{{asset('images/sonatelogo.svp')}}" alt="logo" />
         </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -41,7 +41,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
-                  <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                  <img src="{{asset('images/faces/face4.jpg')}}" alt="image" class="profile-pic">
                 </div>
                 <div class="preview-item-content flex-grow">
                   <h6 class="preview-subject ellipsis font-weight-medium text-dark">David Grey
@@ -140,7 +140,7 @@
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <span class="profile-text">Hello, {{user.prenom}} {{user.nom}} !</span>
-              <img class="img-xs rounded-circle" src="images/faces/face1.jpg" alt="Profile image">
+              <img class="img-xs rounded-circle" src="{{asset('images/faces/face1.jpg')}}" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -185,7 +185,7 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="images/faces/face1.jpg" alt="profile image">
+                  <img src="{{asset('images/faces/face1.jpg')}}" alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name">{{user.prenom}} {{user.nom}} </p>
@@ -198,10 +198,48 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/professeur">
               <i class="menu-icon mdi mdi-television"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#rdv" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-content-copy"></i>
+              <span class="menu-title">Rendez-vous</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="rdv">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="/rendez/vous/new">Ajouter Rendez-vous</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{path('rendez_vous_index')}}">Rechercher Rendez-vous</a>
+                </li>
+               
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#retard" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-content-copy"></i>
+              <span class="menu-title">Assiduté</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="retard">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="/retard/new">Ajouter Retardataire</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{path('retard_index')}}">Rechercher Retardataire</a>
+                </li>
+               
+              </ul>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -273,8 +311,28 @@
           </li>
         </ul>
       </nav>
-      <!-- partial -->
-        {% block body %}{% endblock %}
+      
+      <div class="main-panel">
+        <div class="content-wrapper">
+        {% block body %}
+        
+        
+          <!--div class="row purchace-popup">
+            <div class="col-12">
+              <span class="d-block d-md-flex align-items-center">
+                <p>Like what you see? Check out our premium version for more.</p>
+                <a class="btn ml-auto download-button d-none d-md-block" href="https://github.com/BootstrapDash/StarAdmin-Free-Bootstrap-Admin-Template" target="_blank">Download Free Version</a>
+                <a class="btn purchase-button mt-4 mt-md-0" href="https://www.bootstrapdash.com/product/star-admin-pro/" target="_blank">Upgrade To Pro</a>
+                <i class="mdi mdi-close popup-dismiss d-none d-md-block"></i>
+              </span>
+            </div>
+          </div-->
+         
+       {% endblock %}
+        </div>
+        </div>
+        </div>
+       
          <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
@@ -296,17 +354,17 @@
 
         {% block javascripts %}
          <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
-  <script src="vendors/js/vendor.bundle.addons.js"></script>
+  <script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
+  <script src="{{asset('vendors/js/vendor.bundle.addons.js')}}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/misc.js"></script>
+  <script src="{{asset('js/off-canvas.js')}}"></script>
+  <script src="{{asset('js/misc.js')}}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
+  <script src="{{asset('js/dashboard.js')}}"></script>
   <!-- End custom js for this page-->
         {% endblock %}
     </body>

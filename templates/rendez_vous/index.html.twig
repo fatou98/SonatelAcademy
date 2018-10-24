@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %} 
+<div class="row card" style="padding:30px;width:95%;">
+    <h1>RendezVous</h1>
+<br>
+<hr style="text-align:center;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rendez_vous in rendez_vouses %}
+            <tr>
+                <td>{{ rendez_vous.id }}</td>
+                <td>{{ rendez_vous.date ? rendez_vous.date|date('Y-m-d') : '' }}</td>
+                <td>{{ rendez_vous.heure ? rendez_vous.heure|date('H:i:s') : '' }}</td>
+                <td>{{ rendez_vous.description }}</td>
+                <td>
+                    <a href="{{ path('rendez_vous_show', {'id': rendez_vous.id}) }}">show</a>
+                    <a href="{{ path('rendez_vous_edit', {'id': rendez_vous.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pas de resultats</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+  
+    </div>
+{% endblock %}

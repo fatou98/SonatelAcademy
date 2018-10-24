@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %} 
+<div class="row card" style="padding:30px;width:80%;">
+
+    <h1>RendezVous</h1>
+<br>
+<hr style="text-align:center;">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rendez_vous.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ rendez_vous.date ? rendez_vous.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure</th>
+                <td>{{ rendez_vous.heure ? rendez_vous.heure|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ rendez_vous.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rendez_vous_index') }}">back to list</a>
+
+    <a href="{{ path('rendez_vous_edit', {'id': rendez_vous.id}) }}">edit</a>
+
+    {{ include('rendez_vous/_delete_form.html.twig') }}
+     
+</div>
+
+{% endblock %}

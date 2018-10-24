@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -71,6 +73,16 @@ class Etudiant
      * @ORM\JoinColumn(nullable=false)
      */
     private $filiere;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Retard", mappedBy="etudiant")
+     */
+    private $retards;
+
+    public function __construct()
+    {
+        $this->retards = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -207,5 +219,42 @@ class Etudiant
         $this->filiere = $filiere;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Retard[]
+     */
+    public function getRetards(): Collection
+    {
+        return $this->retards;
+    }
+
+    public function addRetard(Retard $retard): self
+    {
+        if (!$this->retards->contains($retard)) {
+            $this->retards[] = $retard;
+            $retard->setEtudiant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRetard(Retard $retard): self
+    {
+        if ($this->retards->contains($retard)) {
+            $this->retards->removeElement($retard);
+            // set the owning side to null (unless already changed)
+            if ($retard->getEtudiant() === $this) {
+                $retard->setEtudiant(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        $nomcomplet=$this->prenom.''.$this->nom; 
+        return $nomcomplet;
+        
     }
 }
