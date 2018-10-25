@@ -7,20 +7,21 @@
             <div class="card card-statistics">
                 <div class="card-body">
                     <div class="clearfix">
-                        <div class="float-left">
-                            <i class="mdi mdi-cube text-danger icon-lg"></i>
+                    <div class="float-left">
+                            <i class="mdi mdi-account-location text-info icon-lg"></i>
                         </div>
+                       
                         <div class="float-right">
-                            <p class="mb-0 text-right">Total Revenue</p>
+                            <p class="mb-0 text-right">Nombre d'étudiant</p>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0">$65,650</h3>
+                                <h3 class="font-weight-medium text-right mb-0">{{nombreetudiant}}</h3>
                             </div>
                         </div>
                     </div>
-                    <p class="text-muted mt-3 mb-0">
-                        <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>
-                        65% lower growth
-                    </p>
+                    <a class="text-muted mt-3 mb-0" href="{{path('rendez_vous_index')}}">
+                        <i class="mdi mdi-reload mr-1" aria-hidden="true"></i>
+                       Voir les rendez-vous
+                    </a>
                 </div>
             </div>
         </div>
@@ -32,16 +33,16 @@
                             <i class="mdi mdi-receipt text-warning icon-lg"></i>
                         </div>
                         <div class="float-right">
-                            <p class="mb-0 text-right">Orders</p>
+                            <p class="mb-0 text-right">Retard</p>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0">3455</h3>
+                                <h3 class="font-weight-medium text-right mb-0">{{nombreretard}}</h3>
                             </div>
                         </div>
                     </div>
-                    <p class="text-muted mt-3 mb-0">
-                        <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>
-                        Product-wise sales
-                    </p>
+                    <a class="text-muted mt-3 mb-0" href="{{path('retard_index')}}">
+                        <i class="mdi mdi-reload mr-1" aria-hidden="true"></i>
+                       Voir la liste des retard
+                    </a>
                 </div>
             </div>
         </div>
@@ -53,16 +54,16 @@
                             <i class="mdi mdi-poll-box text-success icon-lg"></i>
                         </div>
                         <div class="float-right">
-                            <p class="mb-0 text-right">Sales</p>
+                            <p class="mb-0 text-right">Rendez-vous</p>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0">5693</h3>
+                                <h3 class="font-weight-medium text-right mb-0">{{nombrerdv}}</h3>
                             </div>
                         </div>
                     </div>
-                    <p class="text-muted mt-3 mb-0">
-                        <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i>
-                        Weekly Sales
-                    </p>
+                   <a class="text-muted mt-3 mb-0" href="{{path('rendez_vous_index')}}">
+                        <i class="mdi mdi-reload mr-1" aria-hidden="true"></i>
+                       Voir les rendez-vous
+                    </a>
                 </div>
             </div>
         </div>
@@ -71,7 +72,7 @@
                 <div class="card-body">
                     <div class="clearfix">
                         <div class="float-left">
-                            <i class="mdi mdi-account-location text-info icon-lg"></i>
+                            <i class="mdi mdi-cube text-danger icon-lg"></i>
                         </div>
                         <div class="float-right">
                             <p class="mb-0 text-right">Employees</p>
@@ -558,6 +559,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     {% endblock %}
