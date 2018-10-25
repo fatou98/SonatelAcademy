@@ -1,5 +1,7 @@
 <?php
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -73,8 +75,14 @@ class User implements AdvancedUserInterface, \Serializable {
      * @ORM\Column(type="blob", nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RendezVous", mappedBy="user", orphanRemoval=true)
+     */
+    private $rendezvous;
     public function __construct() {
         $this->isActive = true;
+        $this->rendezvous = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -260,5 +268,41 @@ class User implements AdvancedUserInterface, \Serializable {
         $this->nom = $nom;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|RendezVous[]
+     */
+    public function getRendezvous(): Collection
+    {
+        return $this->rendezvous;
+    }
+
+    public function addRendezvous(RendezVous $rendezvous): self
+    {
+        if (!$this->rendezvous->contains($rendezvous)) {
+            $this->rendezvous[] = $rendezvous;
+            $rendezvous->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRendezvous(RendezVous $rendezvous): self
+    {
+        if ($this->rendezvous->contains($rendezvous)) {
+            $this->rendezvous->removeElement($rendezvous);
+            // set the owning side to null (unless already changed)
+            if ($rendezvous->getUser() === $this) {
+                $rendezvous->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        $nomcomplet=$this->prenom.''.$this->nom; 
+        return $nomcomplet;
     }
 }

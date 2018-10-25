@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %} 
+<div class="row card" style="padding:30px;width:95%;">
+
+    <h1 style="text-align:center;">Retard index</h1>
+<br>
+<hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for retard in retards %}
+            <tr>
+                <td>{{ retard.id }}</td>
+                <td>{{ retard.date ? retard.date|date('Y-m-d') : '' }}</td>
+                <td>{{ retard.heure ? retard.heure|date('H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('retard_show', {'id': retard.id}) }}">show</a>
+                    <a href="{{ path('retard_edit', {'id': retard.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de resultats</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ 
+</div>
+
+{% endblock %}
