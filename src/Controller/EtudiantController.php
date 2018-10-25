@@ -2,31 +2,89 @@
 
 namespace App\Controller;
 
+use App\Entity\Etudiant;
+use App\Form\EtudiantType;
+use App\Repository\EtudiantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/etudiant")
+ */
 class EtudiantController extends AbstractController
 {
     /**
-     * @Route("/addEtudiant", name="addEtudiant")
+     * @Route("/rechercheretudiant", name="etudiant_index", methods="GET")
      */
-    public function addEtudiant()
+    public function index(EtudiantRepository $etudiantRepository): Response
     {
-        $user=$this->getUser();
+        return $this->render('etudiant/index.html.twig', ['etudiants' => $etudiantRepository->findAll()]);
+    }
 
-        return $this->render('etudiant/addEtudiant.html.twig', [
-            'controller_name' => 'EtudiantController','user'=>$user
+    /**
+     * @Route("/new", name="etudiant_new", methods="GET|POST")
+     */
+    public function new(Request $request): Response
+    {
+        $etudiant = new Etudiant();
+        $form = $this->createForm(EtudiantType::class, $etudiant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($etudiant);
+            $em->flush();
+
+            return $this->redirectToRoute('etudiant_index');
+        }
+
+        return $this->render('etudiant/new.html.twig', [
+            'etudiant' => $etudiant,
+            'form' => $form->createView(),
         ]);
     }
-    /**
-     * @Route("/rechercherEtudiant", name="rechercherEtudiant")
-     */
-    public function rechercherEtudiant()
-    {
-        $user=$this->getUser();
 
-        return $this->render('etudiant/rechercherEtudiant.html.twig', [
-            'controller_name' => 'EtudiantController','user'=>$user
+    /**
+     * @Route("/{id}", name="etudiant_show", methods="GET")
+     */
+    public function show(Etudiant $etudiant): Response
+    {
+        return $this->render('etudiant/show.html.twig', ['etudiant' => $etudiant]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="etudiant_edit", methods="GET|POST")
+     */
+    public function edit(Request $request, Etudiant $etudiant): Response
+    {
+        $form = $this->createForm(EtudiantType::class, $etudiant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('etudiant_edit', ['id' => $etudiant->getId()]);
+        }
+
+        return $this->render('etudiant/edit.html.twig', [
+            'etudiant' => $etudiant,
+            'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="etudiant_delete", methods="DELETE")
+     */
+    public function delete(Request $request, Etudiant $etudiant): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$etudiant->getId(), $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($etudiant);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('etudiant_index');
     }
 }

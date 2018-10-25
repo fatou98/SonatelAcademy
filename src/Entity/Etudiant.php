@@ -27,7 +27,7 @@ class Etudiant
     private $nom;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $dateofbirth;
 
