@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>    Etudiant</th>
                 <th>Date</th>
                 <th>Heure</th>
                 <th>actions</th>
@@ -20,11 +21,12 @@
         {% for retard in retards %}
             <tr>
                 <td>{{ retard.id }}</td>
+                <td>{{ retard.etudiant.prenom }} {{retard.etudiant.nom}}</td>
                 <td>{{ retard.date ? retard.date|date('Y-m-d') : '' }}</td>
                 <td>{{ retard.heure ? retard.heure|date('H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('retard_show', {'id': retard.id}) }}">show</a>
-                    <a href="{{ path('retard_edit', {'id': retard.id}) }}">edit</a>
+                    <a href="{{ path('retard_show', {'id': retard.id}) }}">Afficher</a>
+                    <a href="{{ path('retard_edit', {'id': retard.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
