@@ -6,7 +6,7 @@
  <div class="col-md-10 grid-margin stretch-card">
               <div class="card col-md-6">
                 <div class="card-body">
-                  <h2 style="text-align:center;">Ajouter un etudiant</h2><hr>
+                  <h2 style="text-align:center;">Ajouter un professeur</h2><hr>
                   <p class="card-description">
                     *les champs suivis d'une etoile sont obligatoire.
                   </p>
@@ -76,14 +76,7 @@
                       <input type="file" name="img" class="">
                       
                     </div>
-                    <div class="form-group col-md-12">
-                    <select class="form-group col-md-12" name="filiere">
-                    <option value="">Choisir une filière</option>
-                    {% for filiere in filieres %}
-                    <option value="{{filiere.id}}">{{filiere.name}}</option>                      
-                    {% endfor %}
-                    </select>
-</div>
+                   
 
                     <input type="submit" class="btn btn-success mr-4" name="ajouter" value="Enregistrer">
                   </form>

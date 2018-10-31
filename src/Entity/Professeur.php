@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\EtudiantRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProfesseurRepository")
  */
-class Etudiant
+class Professeur
 {
     /**
      * @ORM\Id()
@@ -19,16 +19,15 @@ class Etudiant
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=250)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=150)
      */
     private $nom;
-
-    /**
+/**
      * @ORM\Column(type="string", nullable=true)
      */
     private $dateofbirth;
@@ -69,19 +68,13 @@ class Etudiant
     private $email;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Filiere", inversedBy="etudiants")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Matiere", mappedBy="professeur", orphanRemoval=true)
      */
-    private $filiere;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Retard", mappedBy="etudiant")
-     */
-    private $retards;
+    private $matieres;
 
     public function __construct()
     {
-        $this->retards = new ArrayCollection();
+        $this->matieres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,7 +105,7 @@ class Etudiant
 
         return $this;
     }
-
+    
     public function getDateofbirth(): ?string
     {
         return $this->dateofbirth;
@@ -209,52 +202,35 @@ class Etudiant
         return $this;
     }
 
-    public function getFiliere(): ?Filiere
-    {
-        return $this->filiere;
-    }
-
-    public function setFiliere(?Filiere $filiere): self
-    {
-        $this->filiere = $filiere;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|Retard[]
+     * @return Collection|Matiere[]
      */
-    public function getRetards(): Collection
+    public function getMatieres(): Collection
     {
-        return $this->retards;
+        return $this->matieres;
     }
 
-    public function addRetard(Retard $retard): self
+    public function addMatiere(Matiere $matiere): self
     {
-        if (!$this->retards->contains($retard)) {
-            $this->retards[] = $retard;
-            $retard->setEtudiant($this);
+        if (!$this->matieres->contains($matiere)) {
+            $this->matieres[] = $matiere;
+            $matiere->setProfesseur($this);
         }
 
         return $this;
     }
 
-    public function removeRetard(Retard $retard): self
+    public function removeMatiere(Matiere $matiere): self
     {
-        if ($this->retards->contains($retard)) {
-            $this->retards->removeElement($retard);
+        if ($this->matieres->contains($matiere)) {
+            $this->matieres->removeElement($matiere);
             // set the owning side to null (unless already changed)
-            if ($retard->getEtudiant() === $this) {
-                $retard->setEtudiant(null);
+            if ($matiere->getProfesseur() === $this) {
+                $matiere->setProfesseur(null);
             }
         }
 
         return $this;
     }
-    public function __toString()
-    {
-        $nomcomplet=$this->prenom.''.$this->nom; 
-        return $nomcomplet;
-        
-    }
+
 }

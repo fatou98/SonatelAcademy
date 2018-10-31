@@ -205,7 +205,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard">
+            <a class="nav-link" href="{{path('dashboard')}}">
               <i class="menu-icon mdi mdi-television"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
@@ -257,10 +257,27 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="/addEtudiant">Ajouter étudiant</a>
+                  <a class="nav-link" href="/etudiant/new">Ajouter étudiant</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{path('etudiant_index')}}">Rechercher étudiant</a>
+                </li>
+               
+              </ul>
+            </div>
+          </li><li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#prof" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-content-copy"></i>
+              <span class="menu-title">Professeurs</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="prof">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="/professeur/new">Ajouter prof</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{path('professeur_index')}}">Rechercher prof</a>
                 </li>
                
               </ul>
