@@ -4,12 +4,11 @@
 {% block body %} 
 <div class="row card" style="padding:30px;width:80%;">
 
-    <h1 style="text-align:center;">Edit RendezVous</h1>
+    <h1 style="text-align:center;">Modifier RendezVous</h1>
 <br>
 <hr>
-    {{ include('rendez_vous/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('rendez_vous/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('rendez_vous_index') }}">back to list</a>
 
     {{ include('rendez_vous/_delete_form.html.twig') }}
      

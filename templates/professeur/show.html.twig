@@ -3,14 +3,20 @@
 {% block title %}Professeur{% endblock %}
 
 {% block body %}
-    <h1>Professeur</h1>
+   <div class="col-md-12 grid-margin stretch-card" style="height:150px;background-color:gray;display:flex;justify-content:center;">
+<div class="col-md-2" style="padding-top:50px;">
+<image src="data:image/png;base64,{{ professeur.image }}" style="height:200px;width:200px;border-radius:100%;"></div>
+</div>
+<br><br>
+<br><br>
+<hr style="text-align:center;">
+
+<h2 style="text-align:center;" >Détails du prof </h2>
+<hr style="text-align:center;">
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ professeur.id }}</td>
-            </tr>
+           
             <tr>
                 <th>Prenom</th>
                 <td>{{ professeur.prenom }}</td>
@@ -27,10 +33,7 @@
                 <th>Lieunaissance</th>
                 <td>{{ professeur.lieunaissance }}</td>
             </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ professeur.image }}</td>
-            </tr>
+           
             <tr>
                 <th>Numpiece</th>
                 <td>{{ professeur.numpiece }}</td>
@@ -53,10 +56,50 @@
             </tr>
         </tbody>
     </table>
+    <hr style="text-align:center;">
 
-    <a href="{{ path('professeur_index') }}">back to list</a>
+<h2 style="text-align:center;" >Heures de cours </h2>
+<hr style="text-align:center;">
 
-    <a href="{{ path('professeur_edit', {'id': professeur.id}) }}">edit</a>
+  <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                                <th>Mois</th>
+
+                <th>Nbreheure</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for heure_prof in professeur.heureProfs %}
+            <tr>
+                <td>{{ heure_prof.date ? heure_prof.date|date('Y-m-d') : ''}}</td>
+                <td>{{ heure_prof.mois }}</td>
+                                <td>{{ heure_prof.nbreheure }}</td>
+
+                <td>
+                    <a href="{{ path('heure_prof_show', {'id': heure_prof.id}) }}">show</a>
+                    <a href="{{ path('heure_prof_edit', {'id': heure_prof.id}) }}">edit</a>
+                </td>
+            </tr>
+            
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        <tr>
+                <td colspan="2">Total heure</td>
+                <td colspan="2">{{ somme }}</td>
+               
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('heure_prof_new') }}">Create new</a>
+
+    <a class="btn" href="{{ path('professeur_edit', {'id': professeur.id}) }}">Modifier</a>
 
     {{ include('professeur/_delete_form.html.twig') }}
 {% endblock %}

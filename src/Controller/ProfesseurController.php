@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EtudiantRepository;
 use App\Repository\RendezVousRepository;
 use App\Repository\RetardRepository;
+use App\Repository\HeureProfRepository;
 
 /**
  * @Route("/professeur")
@@ -88,11 +89,15 @@ class ProfesseurController extends AbstractController
     /**
      * @Route("/{id}", name="professeur_show", methods="GET")
      */
-    public function show(Professeur $professeur): Response
+    public function show(Professeur $professeur,HeureProfRepository $heureprofrepo,$id): Response
     {
+        $somme=0;
+       foreach ($professeur->getHeureProfs() as  $value) {
+           $somme=$somme+ $value->getNbreheure();
+       }
         $user=$this->getUser();
-        
-        return $this->render('professeur/show.html.twig', ['professeur' => $professeur,            'user'=>$user,
+        $professeur->setImage(base64_encode(stream_get_contents($professeur->getImage())));
+        return $this->render('professeur/show.html.twig', ['somme'=>$somme,'professeur' => $professeur,     'user'=>$user,
         ]);
     }
 
@@ -107,6 +112,7 @@ class ProfesseurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Modifié avec success.');
 
             return $this->redirectToRoute('professeur_edit', ['id' => $professeur->getId()]);
         }
@@ -131,4 +137,5 @@ class ProfesseurController extends AbstractController
 
         return $this->redirectToRoute('professeur_index');
     }
+    
 }

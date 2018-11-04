@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %}
+
+    <h1>HeureProf index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nbreheure</th>
+                <th>Mois</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for heure_prof in heure_profs %}
+            <tr>
+                <td>{{ heure_prof.id }}</td>
+                <td>{{ heure_prof.nbreheure }}</td>
+                <td>{{ heure_prof.mois }}</td>
+                <td>
+                    <a href="{{ path('heure_prof_show', {'id': heure_prof.id}) }}">show</a>
+                    <a href="{{ path('heure_prof_edit', {'id': heure_prof.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('heure_prof_new') }}">Create new</a>
+{% endblock %}

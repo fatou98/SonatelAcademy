@@ -72,9 +72,27 @@ class Professeur
      */
     private $matieres;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cours", mappedBy="prof")
+     */
+    private $cours;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HeureProf", mappedBy="prof")
+     */
+    private $heureProfs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SalaireProf", mappedBy="Prof")
+     */
+    private $salaireProfs;
+
     public function __construct()
     {
         $this->matieres = new ArrayCollection();
+        $this->cours = new ArrayCollection();
+        $this->heureProfs = new ArrayCollection();
+        $this->salaireProfs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -231,6 +249,105 @@ class Professeur
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Cours[]
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours[] = $cour;
+            $cour->setProf($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->contains($cour)) {
+            $this->cours->removeElement($cour);
+            // set the owning side to null (unless already changed)
+            if ($cour->getProf() === $this) {
+                $cour->setProf(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HeureProf[]
+     */
+    public function getHeureProfs(): Collection
+    {
+        return $this->heureProfs;
+    }
+
+    public function addHeureProf(HeureProf $heureProf): self
+    {
+        if (!$this->heureProfs->contains($heureProf)) {
+            $this->heureProfs[] = $heureProf;
+            $heureProf->setProf($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHeureProf(HeureProf $heureProf): self
+    {
+        if ($this->heureProfs->contains($heureProf)) {
+            $this->heureProfs->removeElement($heureProf);
+            // set the owning side to null (unless already changed)
+            if ($heureProf->getProf() === $this) {
+                $heureProf->setProf(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SalaireProf[]
+     */
+    public function getSalaireProfs(): Collection
+    {
+        return $this->salaireProfs;
+    }
+
+    public function addSalaireProf(SalaireProf $salaireProf): self
+    {
+        if (!$this->salaireProfs->contains($salaireProf)) {
+            $this->salaireProfs[] = $salaireProf;
+            $salaireProf->setProf($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalaireProf(SalaireProf $salaireProf): self
+    {
+        if ($this->salaireProfs->contains($salaireProf)) {
+            $this->salaireProfs->removeElement($salaireProf);
+            // set the owning side to null (unless already changed)
+            if ($salaireProf->getProf() === $this) {
+                $salaireProf->setProf(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        $nomcomplet=$this->prenom.''.$this->nom; 
+        return $nomcomplet;
+        
     }
 
 }

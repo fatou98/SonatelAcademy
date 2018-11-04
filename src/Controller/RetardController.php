@@ -40,8 +40,8 @@ class RetardController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($retard);
             $em->flush();
-
-            return $this->redirectToRoute('retard_index');
+$idetud=$retard->getEtudiant();
+            return $this->redirectToRoute('etudiant_show', ['id' => $idetud->getId()]);
         }
 
         return $this->render('retard/new.html.twig', [

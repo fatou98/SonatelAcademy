@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +23,16 @@ class DateTimeTable
      */
     private $date;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cours", mappedBy="date", orphanRemoval=true)
+     */
+    private $cours;
+
+    public function __construct()
+    {
+        $this->cours = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +46,37 @@ class DateTimeTable
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cours[]
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours[] = $cour;
+            $cour->setDate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->contains($cour)) {
+            $this->cours->removeElement($cour);
+            // set the owning side to null (unless already changed)
+            if ($cour->getDate() === $this) {
+                $cour->setDate(null);
+            }
+        }
 
         return $this;
     }

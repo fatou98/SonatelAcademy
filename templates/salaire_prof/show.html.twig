@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %}
+
+    <h1>SalaireProf</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ salaire_prof.id }}</td>
+            </tr>
+            <tr>
+                <th>TauxHoraires</th>
+                <td>{{ salaire_prof.tauxHoraires }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('salaire_prof_index') }}">back to list</a>
+
+    <a href="{{ path('salaire_prof_edit', {'id': salaire_prof.id}) }}">edit</a>
+
+    {{ include('salaire_prof/_delete_form.html.twig') }}
+{% endblock %}
